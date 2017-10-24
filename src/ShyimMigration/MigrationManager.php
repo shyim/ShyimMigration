@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shyim
- * Date: 24.10.17
- * Time: 19:10
- */
 
 namespace ShyimMigration;
 

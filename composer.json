@@ -1,0 +1,14 @@
+{
+  "name": "shyim/shopware-migration",
+  "description": "Provides easy to use plugin migrations",
+  "keywords": ["shopware", "migrations", "plugins"],
+  "homepage": "https://github.com/shyim/ShyimMigration",
+  "license": [
+    "MIT"
+  ],
+  "autoload": {
+    "psr-0": {
+      "ShyimMigration": "src"
+    }
+  }
+}

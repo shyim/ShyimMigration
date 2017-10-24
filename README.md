@@ -36,4 +36,4 @@ use ShyimMigration\MigrationManager;
 ````
 
 # Example Plugin
-[ShyimMigrationTest](http://github.com/ShyimMigrationTest)
+[ShyimMigrationTest](https://github.com/shyim/ShyimMigrationTest)

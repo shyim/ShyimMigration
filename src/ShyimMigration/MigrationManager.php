@@ -100,9 +100,13 @@ class MigrationManager extends Manager
                 ':plugin_name' => $this->pluginName
             ]);
 
-            throw new \Exception(sprintf(
-                'Could not apply migration (%s). Error: %s ', get_class($migration), $e->getMessage()
-            ));
+            $message = sprintf(
+                'Could not apply migration %s: (%s). Error: %s ', $this->pluginName, get_class($migration), $e->getMessage()
+            );
+
+            $this->log($message);
+
+            throw new \Exception($message);
         }
 
         if ($modus !== \ShyimMigration\AbstractMigration::MODUS_UNINSTALL) {
@@ -172,6 +176,7 @@ class MigrationManager extends Manager
         }
 
         ksort($migrations);
+        $migrations = array_reverse($migrations);
 
         if ($limit !== null) {
             return array_slice($migrations, 0, $limit, true);
@@ -188,7 +193,7 @@ class MigrationManager extends Manager
         $this->createSchemaTable();
 
         $currentVersion = $this->getCurrentVersion();
-        $this->log(sprintf('Current MigrationNumber: %s', $currentVersion));
+        $this->log(sprintf('Current MigrationNumber %s: %s',$this->pluginName,  $currentVersion));
 
         if ($modus !== \ShyimMigration\AbstractMigration::MODUS_UNINSTALL) {
             $migrations = $this->getMigrationsForVersion($currentVersion);
@@ -200,10 +205,19 @@ class MigrationManager extends Manager
 
         /** @var AbstractMigration $migration */
         foreach ($migrations as $migration) {
-            $this->log(sprintf('Apply MigrationNumber: %s - %s', $migration->getVersion(), $migration->getLabel()));
+            $this->log(sprintf('Apply MigrationNumber %s: %s - %s (Mode: %s)', $this->pluginName, $migration->getVersion(), $migration->getLabel(), $modus));
             $this->apply($migration, $modus);
         }
     }
+
+    /**
+     * @param $str
+     */
+    public function log($str)
+    {
+        $this->container->get('pluginlogger')->info($str);
+    }
+
 
     /**
      * @param Plugin $plugin

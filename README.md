@@ -4,7 +4,7 @@
 
 * Require migration package in our plugin folder
 ```bash
-compooser require shyim/shopware-migration
+composer require shyim/shopware-migration
 ```
 * Include autoload.php on top our Plugin Bootstrap
 ```php

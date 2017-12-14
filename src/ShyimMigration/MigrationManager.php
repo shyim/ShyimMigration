@@ -217,6 +217,22 @@ class MigrationManager extends Manager
     {
         $this->container->get('pluginlogger')->info($str);
     }
+    
+    /**
+     * @param string $pluginName
+     */
+    public function setPluginName($pluginName)
+    {
+        $this->pluginName = $pluginName;
+    }
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function setContainer($container)
+    {
+        $this->container = $container;
+    }
 
 
     /**
